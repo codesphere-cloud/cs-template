@@ -1,0 +1,14 @@
+bin/
+obj/
+*.user
+*.suo
+*.cache
+.vs/
+.vscode/
+*.log
+*.tmp
+*.swp
+*.bak
+node_modules/
+wwwroot/lib/
+appsettings.Production.json

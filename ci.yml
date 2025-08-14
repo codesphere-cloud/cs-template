@@ -1,0 +1,42 @@
+schemaVersion: v0.2
+prepare:
+  steps:
+    - name: Install .NET 8 SDK
+      command: |
+        if ! command -v dotnet &> /dev/null; then
+          wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+          chmod +x dotnet-install.sh
+          ./dotnet-install.sh --version latest --install-dir ~/.dotnet
+          export PATH="$HOME/.dotnet:$PATH"
+        fi
+    - name: Restore Backend Dependencies
+      command: cd /home/user/app/backend && dotnet restore
+    - name: Build Backend
+      command: cd /home/user/app/backend && dotnet build --configuration Release
+    - name: Restore Frontend Dependencies
+      command: cd /home/user/app/frontend && dotnet restore
+    - name: Build Frontend
+      command: cd /home/user/app/frontend && dotnet build --configuration Release
+test:
+  steps: []
+run:
+  backend:
+    steps:
+      - name: Run Backend API
+        command: cd /home/user/app/backend && dotnet run --configuration Release
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /api
+      stripPath: false
+  frontend:
+    steps:
+      - name: Run Frontend App
+        command: cd /home/user/app/frontend && dotnet run --configuration Release
+    plan: 8
+    replicas: 1
+    isPublic: true
+    network:
+      path: /
+      stripPath: false
