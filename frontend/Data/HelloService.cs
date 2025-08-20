@@ -19,8 +19,14 @@ public class HelloService
         {
             _logger.LogInformation("Fetching greeting from backend API");
             
-            // Call the backend service directly - in Codesphere, services can communicate internally
-            var response = await _httpClient.GetAsync("http://backend:3000/api/hello");
+            // Use WORKSPACE_DEV_DOMAIN environment variable for Codesphere
+            var workspaceDomain = Environment.GetEnvironmentVariable("WORKSPACE_DEV_DOMAIN");
+            var apiUrl = !string.IsNullOrEmpty(workspaceDomain) 
+                ? $"https://{workspaceDomain}/api/hello"
+                : "http://localhost:3000/api/hello"; // Fallback for local development
+            
+            _logger.LogInformation("Calling backend at: {ApiUrl}", apiUrl);
+            var response = await _httpClient.GetAsync(apiUrl);
             
             if (!response.IsSuccessStatusCode)
             {
@@ -29,6 +35,8 @@ public class HelloService
             }
 
             var content = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("Received response: {Content}", content);
+            
             var jsonDocument = JsonSerializer.Deserialize<JsonElement>(content);
             
             if (jsonDocument.TryGetProperty("message", out var messageElement))
