@@ -7,11 +7,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 // Configure HttpClient for backend API
-builder.Services.AddHttpClient<HelloService>(client =>
-{
-    // Configure base address to point to the backend service via Codesphere routing
-    client.BaseAddress = new Uri("http://localhost:3000/"); // Frontend will use relative URLs to backend
-});
+builder.Services.AddHttpClient<HelloService>();
 
 var app = builder.Build();
 

@@ -19,7 +19,8 @@ public class HelloService
         {
             _logger.LogInformation("Fetching greeting from backend API");
             
-            var response = await _httpClient.GetAsync("/api/hello");
+            // Call the backend service directly - in Codesphere, services can communicate internally
+            var response = await _httpClient.GetAsync("http://backend:3000/api/hello");
             
             if (!response.IsSuccessStatusCode)
             {
