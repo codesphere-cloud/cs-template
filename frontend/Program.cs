@@ -10,7 +10,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient<HelloService>(client =>
 {
     // Configure base address to point to the backend service via Codesphere routing
-    client.BaseAddress = new Uri("http://localhost:5000/"); // Frontend will use relative URLs to backend
+    client.BaseAddress = new Uri("http://localhost:3000/"); // Frontend will use relative URLs to backend
 });
 
 var app = builder.Build();
@@ -33,4 +33,4 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 // Configure to bind to all interfaces for Codesphere
-app.Run("http://0.0.0.0:5000");
+app.Run("http://0.0.0.0:3000");
