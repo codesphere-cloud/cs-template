@@ -1,11 +1,11 @@
-# Live Currency Exchange Rate Viewer
+# Hello World App
 
-A real-time currency exchange rate viewer built with C# and .NET, featuring a clean separation between backend API and frontend interface.
+A simple hello world application built with C# and .NET, demonstrating a clean separation between backend API and frontend interface.
 
 ## 🏗️ Architecture
 
-- **Backend**: ASP.NET Core Web API that fetches live currency rates from ExchangeRate-API (runs on port 3000)
-- **Frontend**: Blazor Server app that displays the rates in a user-friendly interface
+- **Backend**: ASP.NET Core Web API that returns a simple greeting (runs on port 3000)
+- **Frontend**: Blazor Server app that displays the greeting from the backend
 
 ## 📁 Project Structure
 
@@ -13,17 +13,19 @@ A real-time currency exchange rate viewer built with C# and .NET, featuring a cl
 /
 ├── backend/                    # ASP.NET Core Web API
 │   ├── Controllers/
-│   │   └── RateController.cs   # Currency rate endpoint
+│   │   └── HelloController.cs  # Simple hello endpoint
 │   ├── Program.cs              # API configuration
-│   └── backend.csproj
+│   ├── backend.csproj          # Project file
+│   └── appsettings.json        # Configuration
 ├── frontend/                   # Blazor Server App
 │   ├── Data/
-│   │   └── RateService.cs      # Service to communicate with backend
+│   │   └── HelloService.cs     # Service to communicate with backend
 │   ├── Pages/
-│   │   └── Index.razor         # Main currency rates page
+│   │   └── Index.razor         # Main hello world page
 │   ├── Program.cs              # Frontend configuration
-│   └── frontend.csproj
-└── CurrencyExchangeViewer.sln  # Solution file
+│   └── frontend.csproj         # Project file
+├── HelloWorld.sln              # Solution file
+└── ci.yml                      # Codesphere deployment config
 ```
 
 ## 🚀 Running on Codesphere
@@ -46,30 +48,24 @@ The backend is configured to run on port 3000 for Codesphere deployment.
 
 ## 🌐 API Endpoints
 
-- `GET /api/rate` - Fetches current exchange rates relative to USD
+- `GET /api/hello` - Returns a simple greeting message
 
 ## ✨ Features
 
-- **Real-time Data**: Fetches live currency exchange rates
-- **Error Handling**: Comprehensive error handling with retry functionality
+- **Simple Architecture**: Clean separation between frontend and backend
+- **Error Handling**: Basic error handling with retry functionality
 - **Responsive UI**: Clean, modern interface with Bootstrap styling
 - **Loading States**: Visual feedback during data fetching
-- **Manual Refresh**: Button to update rates on demand
+- **Manual Refresh**: Button to fetch new greeting
 
 ## 🔧 Development
 
 The application uses:
 - **.NET 8.0** for both backend and frontend
-- **ExchangeRate-API** for live currency data
 - **Bootstrap 5** for styling
 - **Blazor Server** for interactive UI
 
-## 📊 Data Source
-
-Currency rates are fetched from the free ExchangeRate-API service:
-`https://open.er-api.com/v6/latest/USD`
-
-This provides real-time exchange rates relative to USD for over 150 currencies.
+This template serves as a starting point for building more complex frontend/backend applications with C# and .NET.
 - Any modern web browser
 
 ### Running the Application
